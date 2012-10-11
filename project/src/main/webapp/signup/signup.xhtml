@@ -1,0 +1,151 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/signup/template.xhtml">
+
+	<ui:define name="content">
+
+
+			<div align="right">
+				<span style="color: #FF0000;">* </span>Mandatory Fields
+			</div>
+
+			<div align="left"
+				style="clear: both; margin-top: 5px; padding-top: 5px;">
+				<span style="font-weight: bold;">Your Details</span>
+			</div>
+
+			<div style="border-bottom: 1px solid #DBE8F8;width: 70%;"></div>
+			<div style="clear: both; margin-top: 5px; padding-top: 5px;">
+				<h:outputLabel id="usernameLabel" value="Username :" />
+				<h:inputText id="usernameinput" value="" title="First Name"/>
+				<script type="text/javascript">
+					Spring.addDecoration(new Spring.ElementDecoration({
+						elementId : "usernameinput",
+						widgetType : "dijit.form.ValidationTextBox",
+						widgetAttrs : {
+							promptMessage : "Enter User Name",
+							required : true
+						}
+					}));
+				</script>
+			</div>
+
+			<div style="clear: both; margin-top: 5px; padding-top: 5px;">
+				<h:outputLabel id="passwordLabel" value="Password :" />
+				<h:inputText id="passwordinput" value="" />
+				<script type="text/javascript">
+					Spring.addDecoration(new Spring.ElementDecoration({
+						elementId : "passwordinput",
+						widgetType : "dijit.form.ValidationTextBox",
+						widgetAttrs : {
+							promptMessage : "Enter password",
+							required : true
+						}
+					}));
+				</script>
+			</div>
+
+
+			<div style="clear: both; margin-top: 5px; padding-top: 5px;">
+				<h:outputLabel id="firstnameLabel" value="First Name:" />
+				<h:inputText id="firstnameinput" value="" />
+				<script type="text/javascript">
+					Spring.addDecoration(new Spring.ElementDecoration({
+						elementId : "firstnameinput",
+						widgetType : "dijit.form.ValidationTextBox",
+						widgetAttrs : {
+							promptMessage : "Enter Firstname",
+							required : true
+						}
+					}));
+				</script>
+			</div>
+
+			<div style="clear: both; margin-top: 5px; padding-top: 5px;">
+				<h:outputLabel id="lastnameLabel" value="Last Name:" />
+				<h:inputText id="lastnameinput" value="" />
+				<script type="text/javascript">
+					Spring.addDecoration(new Spring.ElementDecoration({
+						elementId : "lastnameinput",
+						widgetType : "dijit.form.ValidationTextBox",
+						widgetAttrs : {
+							promptMessage : "Enter Lastname",
+							required : true
+						}
+					}));
+				</script>
+			</div>
+
+			<div style="clear: both; margin-top: 5px; padding-top: 5px;">
+				<h:outputLabel id="genderbLabel" value="Gender :" />
+				<h:inputText id="genderinput" value="" />
+				<script type="text/javascript">
+					Spring.addDecoration(new Spring.ElementDecoration({
+						elementId : "genderinput",
+						widgetType : "dijit.form.ValidationTextBox",
+						widgetAttrs : {
+							promptMessage : "Enter Gender",
+							required : true
+						}
+					}));
+				</script>
+			</div>
+
+			<div style="clear: both; margin-top: 5px; padding-top: 5px;">
+				<h:outputLabel id="dobLabel" value="DOB:" />
+				<h:inputText id="dobinput" value="" />
+				<script type="text/javascript">
+					Spring.addDecoration(new Spring.ElementDecoration({
+						elementId : "dobinput",
+						widgetType : "dijit.form.ValidationTextBox",
+						widgetAttrs : {
+							promptMessage : "Enter DOB",
+							required : true
+						}
+					}));
+				</script>
+			</div>
+
+			<div align="left"
+				style="clear: both; margin-top: 5px; padding-top: 5px;">
+				<span style="font-weight: bold;">Your Contact Details</span>
+			</div>
+
+			<div style="border-bottom: 1px solid #DBE8F8; width: 70%;" ></div>
+			<div style="clear: both; margin-top: 5px; padding-top: 5px;">
+				<h:outputLabel id="emailLabel" value="Email :" />
+				<h:inputText id="emailinput" value="" />
+				<script type="text/javascript">
+					Spring.addDecoration(new Spring.ElementDecoration({
+						elementId : "emailinput",
+						widgetType : "dijit.form.ValidationTextBox",
+						widgetAttrs : {
+							promptMessage : "Enter Email",
+							required : true
+						}
+					}));
+				</script>
+			</div>
+
+			<div style="clear: both; margin-top: 5px; padding-top: 5px;">
+				<h:outputLabel id="mobileLabel" value="Mobile :" />
+				<h:inputText id="mobileinput" value="" />
+				<script type="text/javascript">
+					Spring.addDecoration(new Spring.ElementDecoration({
+						elementId : "mobileinput",
+						widgetType : "dijit.form.ValidationTextBox",
+						widgetAttrs : {
+							promptMessage : "Enter Mobile",
+							required : true
+						}
+					}));
+				</script>
+			</div>
+
+	
+	</ui:define>
+</ui:composition>

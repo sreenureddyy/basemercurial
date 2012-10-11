@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:chart="http://sourceforge.net/projects/jsf-comp"
+	xmlns:rich="http://richfaces.org/rich">
+<h:head>
+</h:head>
+<h:body>
+	<f:view>
+		<h:form>
+			<h:panelGrid>
+				<h:panelGroup>
+					<chart:chart id="chart"
+						datasource="#{chartBean.localDefaultPieDataset}" type="pie"
+						depth="50" title="Barca" alpha="75" is3d="true" startAngle="90"
+						legend="false" colors="magenta,#CACACA,blue" />
+				</h:panelGroup>
+			</h:panelGrid>
+		</h:form>
+	</f:view>
+</h:body>
+</html>

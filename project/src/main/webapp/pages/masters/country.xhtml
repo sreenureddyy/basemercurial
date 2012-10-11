@@ -1,0 +1,95 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="title">
+		<title>Sree-Country Master</title>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form id="countryform">
+			<p:growl id="msgs" />
+
+			<p:panel header="Create a new Country" id="country">
+				<h:panelGrid columns="2" id="grid_country">
+					<h:outputLabel value="#{msg['Country.jsf']} : *" for="txt_countryname"></h:outputLabel>
+					<p:inputText id="txt_countryname" required="true"
+						value="#{countryBean.country.countryName}" />
+
+					<h:outputLabel value="Country Code : *" for="txt_countrycode"></h:outputLabel>
+					<p:inputText id="txt_countrycode"
+						value="#{countryBean.country.countryCode}" />
+
+					<h:outputLabel value="Phone Code : *" for="txt_phonecode"></h:outputLabel>
+					<p:inputText id="txt_phonecode"
+						value="#{countryBean.country.phoneCode}" />
+
+					<h:outputLabel value="Default : " for="chkbox_isDefault"></h:outputLabel>
+					<p:selectBooleanCheckbox id="chkbox_isDefault"
+						value="#{countryBean.country.isDefault}" />
+
+					<p:commandButton value="Reset" type="reset" />
+					<p:commandButton id="btn_add" value="Add"
+						update="countries msgs @parent"
+						action="#{countryBean.saveCountry}">
+						<p:collector value="#{countryBean.country}"
+							addTo="#{countryBean.countries}" />
+					</p:commandButton>
+				</h:panelGrid>
+			</p:panel>
+
+
+			<p:outputPanel id="countries">
+				<p:dataTable id="countriesTable" value="#{countryBean.countries}"
+					var="country">
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Country Name" />
+						</f:facet>
+						<h:outputText value="#{country.countryName}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Country Code" />
+						</f:facet>
+						<h:outputText value="#{country.countryCode}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Phone Code" />
+						</f:facet>
+						<h:outputText value="#{country.phoneCode}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Default" />
+						</f:facet>
+						<h:outputText value="#{country.isDefault}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Operation" />
+						</f:facet>
+						<p:commandButton action="#{countryBean.deleteCountry}"
+							process="@this" icon="ui-icon-close" title="Delete"
+							update=":countryform:countries">
+							<f:setPropertyActionListener
+								target="#{countryBean.selectedCountry}" value="#{country}" />
+						</p:commandButton>
+					</p:column>
+
+
+
+				</p:dataTable>
+			</p:outputPanel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

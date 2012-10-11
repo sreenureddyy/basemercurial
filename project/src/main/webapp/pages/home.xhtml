@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="title">
+		<title>Pharmaci-Home</title>
+	</ui:define>
+
+
+	<ui:define name="content">
+		<h:form>
+			<h:outputLabel value="#{msg['Country.jsf']} : *" for="txt_countryname"></h:outputLabel>
+			
+			<h:commandButton value="TestJMS"
+				action="#{sendMessageBean.sendMessage}"></h:commandButton>
+				
+				
+			<h:commandButton value="TestJMS"
+				action="#{homeBean.doSomeThing}"></h:commandButton>
+				
+			<br />
+			<h:outputText value="#{droolsBean.amount}" />
+			
+			<h:outputText value="#{homeBean.getBundleValue}" />
+
+			<p:dataTable id="tbl" var="user" value="#{homeBean.userList}"
+				paginator="true" rows="10">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="FirstName" />
+					</f:facet>
+					<h:outputText value="#{user.firstname}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="UserName" />
+					</f:facet>
+					<h:outputText value="#{user.username}" /> 
+				</p:column>
+			</p:dataTable>
+
+			<h:panelGrid columns="1">
+				<p:panel header="Export All Data">
+					<h:commandLink>
+
+						<h:outputText value="xls" />
+						<p:dataExporter type="xls" target="tbl" fileName="user" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<h:outputText value="pdf" />
+						<p:dataExporter type="pdf" target="tbl" fileName="user" />
+					</h:commandLink>
+
+
+				</p:panel>
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

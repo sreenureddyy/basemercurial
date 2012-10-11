@@ -1,0 +1,32 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<!-- import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" /-->
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+	<jaxws:endpoint id="myService"
+		implementor="com.sree.base.service.webservice.MyServiceImpl"
+		address="/myService" />
+
+	<jaxws:endpoint id="orderProcess"
+		implementor="com.sree.base.service.webservice.rest.OrderProcessImpl"
+		address="/orderProcess"
+		bindingUri="http://apache.org/cxf/binding/http">
+		<jaxws:serviceFactory>
+			<bean
+				class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean">
+				<property name="wrapped" value="false" />
+			</bean>
+		</jaxws:serviceFactory>
+	</jaxws:endpoint>
+</beans>
+
+
+
+
+

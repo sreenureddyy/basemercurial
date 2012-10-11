@@ -1,0 +1,373 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>maven-project</artifactId>
+		<groupId>com.sree</groupId>
+		<version>1.0</version>
+	</parent>
+	<groupId>com.sree</groupId>
+	<artifactId>project</artifactId>
+	<version>1.0</version>
+	<packaging>war</packaging>
+	<name>project Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project-version>1.0</project-version>
+
+		<!-- for Alhpa versions it was just 'ALPHA2' -->
+		<!-- org.richfaces.bom.version> 4.0.0.Final </org.richfaces.bom.version -->
+		<org.springsecurity-version>
+			3.0.5.RELEASE
+		</org.springsecurity-version>
+		<spring.version>3.0.5.RELEASE</spring.version>
+		<hibernate-version>3.6.5.Final</hibernate-version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<packagingExcludes>
+						WEB-INF/lib/slf4j*.jar
+					</packagingExcludes>
+					<webXml>
+						${basedir}/src/main/webapp/WEB-INF/web.xml
+					</webXml>
+					<warName>project</warName>
+					<warSourceDirectory>
+						src/main/webapp
+					</warSourceDirectory>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<phase>pre-integration-test</phase>
+						<configuration>
+							<tasks>
+								<echo>
+									ANT TASK - copying files to the
+									junit testing folder....
+								</echo>
+								<copy todir="${basedir}/target/classes" overwrite="true">
+									<fileset dir="${basedir}/target/project/">
+										<include name="WEB-INF/lib/base-*.jar" />
+									</fileset>
+								</copy>
+								<echo>
+									ANT TASK - Deploying war to
+									Tomcat...
+								</echo>
+								<copy file="${basedir}/target/project.war" todir="/home/sree/Java/apache-tomcat-7.0.28/webapps" />
+								<delete dir="/home/sree/Java/apache-tomcat-7.0.28/webapps/project" />
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.7</version>
+		</dependency>
+
+		<!-- Project dependencies starts -->
+		<dependency>
+			<groupId>com.sree.common</groupId>
+			<artifactId>common</artifactId>
+			<version>${project-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sree.base.domain</groupId>
+			<artifactId>base-domain</artifactId>
+			<version>${project-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sree.base.dao</groupId>
+			<artifactId>base-dao</artifactId>
+			<version>${project-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sree.base.service</groupId>
+			<artifactId>base-service</artifactId>
+			<version>${project-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sree.base.web</groupId>
+			<artifactId>base-web</artifactId>
+			<version>${project-version}</version>
+		</dependency>
+		<!-- Project dependencies ends -->
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.6</version>
+		</dependency>
+		<!-- dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId> 
+			<version>1.4.2</version> </dependency -->
+		<!-- dependency> <groupId>javax.el</groupId> <artifactId>el-api</artifactId> 
+			<scope>provided</scope> </dependency> <dependency> <groupId>javax.servlet</groupId> 
+			<artifactId>jstl</artifactId> </dependency> <dependency> <groupId>net.sf.ehcache</groupId> 
+			<artifactId>ehcache</artifactId> </dependency -->
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.16</version>
+		</dependency>
+
+		<!-- Richfaces dependencies starts -->
+		<!-- dependency> <groupId>org.richfaces.ui</groupId> <artifactId>richfaces-components-ui</artifactId> 
+			<version>${org.richfaces.bom.version}</version> </dependency> <dependency> 
+			<groupId>org.richfaces.core</groupId> <artifactId>richfaces-core-impl</artifactId> 
+			<version>${org.richfaces.bom.version}</version> </dependency> <dependency> 
+			<groupId>org.richfaces.cdk</groupId> <artifactId>annotations</artifactId> 
+			<scope>provided</scope> <version>${org.richfaces.bom.version}</version> </dependency -->
+		<!-- Richfaces dependencies ends -->
+
+
+		<!-- Primefaces Starts -->
+
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>3.0.RC1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>flick</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+
+		<!-- Primefaces ends -->
+
+		<!-- JSF dependencies starts -->
+		<!-- dependency> <groupId>javax.faces</groupId> <artifactId>jsf-api</artifactId> 
+			<version>2.0.2-FCS</version> </dependency> <dependency> <groupId>javax.faces</groupId> 
+			<artifactId>jsf-impl</artifactId> <version>2.0.2-FCS</version> </dependency -->
+		<!-- JSF dependencies ends -->
+
+		<!-- Spring dependencies starts -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${org.springsecurity-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${org.springsecurity-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${org.springsecurity-version}</version>
+		</dependency>
+		<!-- dependency> <groupId>org.springframework</groupId> <artifactId>spring-aspects</artifactId> 
+			<version>${spring.version}</version> </dependency -->
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- Spring dependencies ends -->
+
+		<!-- Jms ActiveMQ -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-core</artifactId>
+			<version>5.5.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.jms</groupId>
+			<artifactId>jms</artifactId>
+			<version>1.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Jms ActiveMQ End -->
+
+
+		<!-- Hibernate Dependencies starts -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>${hibernate-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-search</artifactId>
+			<version>4.0.0.Final</version>
+		</dependency>
+		<!-- Hibernate Dependencies ends -->
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency>
+
+		<!-- CFX Dependencies starts -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-api</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-core</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-bindings-http</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+		<!--dependency> <groupId>com.sun.xml.ws</groupId> <artifactId>jaxws-rt</artifactId> 
+			<scope>compile</scope> <version>2.2</version> <exclusions> <exclusion> <groupId>com.sun.istack</groupId> 
+			<artifactId>istack-commons-runtime</artifactId> </exclusion> </exclusions> 
+			</dependency -->
+
+		<!-- CFX Dependencies starts -->
+
+		<!-- Quartz framework -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>1.8.5</version>
+		</dependency>
+		<!-- Quartz framework Ends -->
+
+		<!-- JFree Charts -->
+		<dependency>
+			<groupId>jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<version>1.0.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.jsf-comp</groupId>
+			<artifactId>chartcreator</artifactId>
+			<version>1.2.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.faces</groupId>
+					<artifactId>jsf-impl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.faces</groupId>
+					<artifactId>jsf-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- JFree Charts Ends -->
+
+		<!-- Drools -->
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-core</artifactId>
+			<version>5.4.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-decisiontables</artifactId>
+			<version>5.4.0.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<!-- Drools Ends -->
+	</dependencies>
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+	<!-- dependencyManagement> <dependencies> <dependency> <groupId>org.richfaces</groupId> 
+		<artifactId>richfaces-bom</artifactId> <version>${org.richfaces.bom.version}</version> 
+		<scope>import</scope> <type>pom</type> </dependency> </dependencies> </dependencyManagement -->
+
+</project>

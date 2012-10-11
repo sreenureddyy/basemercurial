@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div style="float: right;">
+
+		<h:outputText value="Welcome, #{baseBean.user.username}" />
+
+		<a title="Sign Out" style="text-decoration: none;"
+			href="#{facesContext.externalContext.requestContextPath}/spring/logout">Sign
+			Out</a>
+
+	</div>
+	<ul>
+		<li><a class="active"
+			href="http://matthewjamestaylor.com/blog/perfect-3-column.htm">3
+				Column <span>Holy Grail</span>
+		</a></li>
+		<li><a
+			href="http://matthewjamestaylor.com/blog/perfect-3-column-blog-style.htm">3
+				Column <span>Blog Style</span>
+		</a></li>
+		<li><a
+			href="http://matthewjamestaylor.com/blog/perfect-2-column-left-menu.htm">2
+				Column <span>Left Menu</span>
+		</a></li>
+		<li><a
+			href="http://matthewjamestaylor.com/blog/perfect-2-column-right-menu.htm">2
+				Column <span>Right Menu</span>
+		</a></li>
+	</ul>
+	<p id="layoutdims">
+		Measure columns in: <a
+			href="http://matthewjamestaylor.com/blog/ultimate-2-column-left-menu-pixels.htm">Pixel
+			widths</a> | <a
+			href="http://matthewjamestaylor.com/blog/ultimate-2-column-left-menu-ems.htm">Em
+			widths</a> | <strong>Percentage widths</strong>
+	</p>
+
+</ui:composition>

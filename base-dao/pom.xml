@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>maven-project</artifactId>
+		<groupId>com.sree</groupId>
+		<version>1.0</version>
+	</parent>
+	<groupId>com.sree.base.dao</groupId>
+	<artifactId>base-dao</artifactId>
+	<version>1.0</version>
+	<name>base-dao</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project-version>1.0</project-version>
+
+		<!-- for Alhpa versions it was just 'ALPHA2' -->
+		<!-- org.richfaces.bom.version> 4.0.0.Final </org.richfaces.bom.version -->
+		<org.springsecurity-version>
+			3.0.5.RELEASE
+		</org.springsecurity-version>
+		<spring.version>3.0.5.RELEASE</spring.version>
+		<hibernate-version>3.6.5.Final</hibernate-version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+		<!-- Project dependencies starts -->
+		<dependency>
+			<groupId>com.sree.common</groupId>
+			<artifactId>common</artifactId>
+			<version>${project-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sree.base.domain</groupId>
+			<artifactId>base-domain</artifactId>
+			<version>${project-version}</version>
+		</dependency>
+		<!-- Project dependencies ends -->
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.16</version>
+		</dependency>
+
+		<!-- Spring dependencies starts -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${org.springsecurity-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${org.springsecurity-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${org.springsecurity-version}</version>
+		</dependency>
+		<!-- Spring dependencies ends -->
+
+		<!-- Hibernate Dependencies starts -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>${hibernate-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-search</artifactId>
+			<version>4.0.0.Final</version>
+		</dependency>
+		<!-- Hibernate Dependencies ends -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency>
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>hibernate-repository</id>
+			<name>Hibernate Repository</name>
+			<url>
+				https://repository.jboss.org/nexus/content/repositories/releases
+			</url>
+		</repository>
+	</repositories>
+</project>

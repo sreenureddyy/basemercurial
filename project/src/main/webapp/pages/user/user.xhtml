@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="title">
+		<title>Sree-User</title>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form id="userform">
+			<p:growl id="msgs" />
+
+			<p:panel header="Create a new user" id="user">
+				<h:panelGrid columns="2" id="grid_user">
+					<h:outputLabel value="Username : *" for="txt_username"></h:outputLabel>
+					<p:inputText id="txt_title" value="#{userBean.user.username}"
+						required="true" />
+
+					<h:outputLabel value="Password : *" for="txt_password"></h:outputLabel>
+					<p:password id="pwd_password" value="#{userBean.user.password}"
+						feedback="true" required="true" inline="true" />
+
+					<h:outputLabel value="Firstname : *" for="txt_firstname"></h:outputLabel>
+					<p:inputText id="txt_firstname" required="true"
+						value="#{userBean.user.firstname}" />
+
+					<h:outputLabel value="Lastname : " for="txt_lastname"></h:outputLabel>
+					<p:inputText id="txt_lastname" required="true"
+						value="#{userBean.user.lastname}" />
+
+					<h:outputLabel value="DOB : *" for="txt_dob"></h:outputLabel>
+					<p:calendar id="cal_dob" effect="explode" required="true"
+						pattern="MM/dd/yyyy HH:mm:ss a" navigator="true"
+						value="#{userBean.user.dob}" />
+
+					<h:outputLabel for="som_gender" value="Geneder" />
+					<h:selectOneMenu id="som_gender" value="#{userBean.user.gender}">
+						<f:selectItem itemLabel="Select Model" itemValue="" />
+						<f:selectItems value="#{userBean.genders}" var="gender"
+							itemLabel="#{gender[0]}" itemValue="#{gender[1]}" />
+					</h:selectOneMenu>
+
+					<p:commandButton value="Reset" type="reset" />
+					<p:commandButton id="btn_add" value="Add"
+						update="users msgs @parent" action="#{userBean.saveUser}">
+						<p:collector value="#{userBean.user}" addTo="#{userBean.users}" />
+					</p:commandButton>
+				</h:panelGrid>
+			</p:panel>
+
+			<p:outputPanel id="users">
+				<p:dataTable id="usersTable" value="#{userBean.users}" var="user">
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Username" />
+						</f:facet>
+						<h:outputText value="#{user.username}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Firstname" />
+						</f:facet>
+						<h:outputText value="#{user.firstname}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Operation" />
+						</f:facet>
+						<p:commandLink value="Remove" update=":userform:users"
+							process=":userform:users">
+							<p:collector value="#{user}" removeFrom="#{userBean.users}" />
+						</p:commandLink>
+					</p:column>
+
+				</p:dataTable>
+			</p:outputPanel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
