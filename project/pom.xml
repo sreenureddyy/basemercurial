@@ -9,7 +9,7 @@
 		<version>1.0</version>
 	</parent>
 	<groupId>com.sree</groupId>
-	<artifactId>ysreddi</artifactId>
+	<artifactId>project</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
 	<name>project Maven Webapp</name>
