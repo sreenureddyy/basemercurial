@@ -26,6 +26,7 @@
 				value="org.hibernate.search.store.FSDirectoryProvider" />
 			<property name="hibernate.search.indexing_strategy" value="manual" />
 			<property name="hibernate.search.default.indexBase" value="${basedir}" />
+			
 		</properties>
 	</persistence-unit>
 </persistence>

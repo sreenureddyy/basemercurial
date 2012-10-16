@@ -1,40 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:jd="http://www.springframework.org/schema/jdbc"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+	        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd    
+	        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+	        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
 
 	<!-- Enable annotation-driven configuration and auto-detection -->
 	<context:annotation-config />
 
-	<bean id="dataSource"
-		class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="url"
-			value="jdbc:mysql://localhost:3306/project" />
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="url" value="jdbc:mysql://localhost:3306/project" />
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="username" value="root" />
 		<property name="password" value="1250" />
 
 	</bean>
 
-	<!-- jee:jndi-lookup id="dataSource"
-		jndi-name="java:comp/env/jdbc/mysqldb" resource-ref="true"
-		lookup-on-startup="true" /-->
+	<!-- jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/mysqldb" 
+		resource-ref="true" lookup-on-startup="true" / -->
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="persistenceUnitName" value="sree" />
 		<property name="jpaVendorAdapter">
-			<bean
-				class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="generateDdl" value="true" />
 				<property name="showSql" value="true" />
-				<property name="databasePlatform"
-					value="com.sree.mysqlDialect.MySql5Fix" />
+				<property name="databasePlatform" value="com.sree.mysqlDialect.MySql5Fix" />
 			</bean>
 		</property>
 	</bean>
@@ -42,10 +40,13 @@
 	<!-- Use @Transactional annotation on methods -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<bean id="transactionManager"
-		class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory"
-			ref="entityManagerFactory" />
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
+
+	<jd:initialize-database data-source="dataSource"
+		enabled="true">
+		<jd:script location="/META-INF/sql/init-db.sql" />
+	</jd:initialize-database>
 
 </beans>
