@@ -17,7 +17,6 @@
 	<properties>
 		<project-version>1.0</project-version>
 
-		<!-- for Alhpa versions it was just 'ALPHA2' -->
 		<!-- org.richfaces.bom.version> 4.0.0.Final </org.richfaces.bom.version -->
 		<org.springsecurity-version>
 			3.0.5.RELEASE
@@ -150,25 +149,12 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.5.6</version>
 		</dependency>
-		<!-- dependency> <groupId>javax.el</groupId> <artifactId>el-api</artifactId> 
-			<scope>provided</scope> </dependency> <dependency> <groupId>javax.servlet</groupId> 
-			<artifactId>jstl</artifactId> </dependency> <dependency> <groupId>net.sf.ehcache</groupId> 
-			<artifactId>ehcache</artifactId> </dependency -->
 
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.16</version>
 		</dependency>
-
-		<!-- Richfaces dependencies starts -->
-		<!-- dependency> <groupId>org.richfaces.ui</groupId> <artifactId>richfaces-components-ui</artifactId> 
-			<version>${org.richfaces.bom.version}</version> </dependency> <dependency> 
-			<groupId>org.richfaces.core</groupId> <artifactId>richfaces-core-impl</artifactId> 
-			<version>${org.richfaces.bom.version}</version> </dependency> <dependency> 
-			<groupId>org.richfaces.cdk</groupId> <artifactId>annotations</artifactId> 
-			<scope>provided</scope> <version>${org.richfaces.bom.version}</version> </dependency -->
-		<!-- Richfaces dependencies ends -->
 
 		<!-- Primefaces Starts -->
 
@@ -185,12 +171,6 @@
 		</dependency>
 
 		<!-- Primefaces ends -->
-
-		<!-- JSF dependencies starts -->
-		<!-- dependency> <groupId>javax.faces</groupId> <artifactId>jsf-api</artifactId> 
-			<version>2.0.2-FCS</version> </dependency> <dependency> <groupId>javax.faces</groupId> 
-			<artifactId>jsf-impl</artifactId> <version>2.0.2-FCS</version> </dependency -->
-		<!-- JSF dependencies ends -->
 
 		<!-- Spring dependencies starts -->
 		<dependency>
@@ -233,8 +213,6 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${org.springsecurity-version}</version>
 		</dependency>
-		<!-- dependency> <groupId>org.springframework</groupId> <artifactId>spring-aspects</artifactId> 
-			<version>${spring.version}</version> </dependency -->
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -302,12 +280,6 @@
 			<artifactId>cxf-rt-bindings-http</artifactId>
 			<version>2.4.1</version>
 		</dependency>
-		<!--dependency> <groupId>com.sun.xml.ws</groupId> <artifactId>jaxws-rt</artifactId> 
-			<scope>compile</scope> <version>2.2</version> <exclusions> <exclusion> <groupId>com.sun.istack</groupId> 
-			<artifactId>istack-commons-runtime</artifactId> </exclusion> </exclusions> 
-			</dependency -->
-
-		<!-- CFX Dependencies starts -->
 
 		<!-- Quartz framework -->
 		<dependency>
@@ -323,22 +295,6 @@
 			<artifactId>jfreechart</artifactId>
 			<version>1.0.13</version>
 		</dependency>
-
-		<!-- dependency>
-			<groupId>net.sf.jsf-comp</groupId>
-			<artifactId>chartcreator</artifactId>
-			<version>1.2.0</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.faces</groupId>
-					<artifactId>jsf-impl</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.faces</groupId>
-					<artifactId>jsf-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency-->
 		<!-- JFree Charts Ends -->
 
 		<!-- Drools -->
@@ -369,8 +325,5 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
-	<!-- dependencyManagement> <dependencies> <dependency> <groupId>org.richfaces</groupId> 
-		<artifactId>richfaces-bom</artifactId> <version>${org.richfaces.bom.version}</version> 
-		<scope>import</scope> <type>pom</type> </dependency> </dependencies> </dependencyManagement -->
 
 </project>
