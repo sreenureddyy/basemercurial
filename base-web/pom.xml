@@ -15,10 +15,6 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project-version>1.0</project-version>
-
-		<!-- for Alhpa versions it was just 'ALPHA2' -->
-		<!-- org.richfaces.bom.version> 4.0.0.Final </org.richfaces.bom.version -->
-
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<org.springsecurity-version>
 			3.0.5.RELEASE
@@ -60,15 +56,6 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- Richfaces dependencies starts -->
-		<!-- dependency> <groupId>org.richfaces.ui</groupId> <artifactId>richfaces-components-ui</artifactId> 
-			<version>${org.richfaces.bom.version}</version> </dependency> <dependency> 
-			<groupId>org.richfaces.core</groupId> <artifactId>richfaces-core-impl</artifactId> 
-			<version>${org.richfaces.bom.version}</version> </dependency> <dependency> 
-			<groupId>org.richfaces.cdk</groupId> <artifactId>annotations</artifactId> 
-			<scope>provided</scope> <version>${org.richfaces.bom.version}</version> </dependency -->
-		<!-- Richfaces dependencies ends -->
 
 		<!-- Primefaces Starts -->
 
@@ -154,24 +141,8 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.16</version>
 		</dependency>
-		
-		<!-- dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId> 
-			<version>1.4.2</version> </dependency-->
-
-		<!-- JFree Charts -->
-		<!-- dependency> <groupId>jfree</groupId> <artifactId>jfreechart</artifactId> 
-			<version>1.0.13</version> </dependency> <dependency> <groupId>net.sf.jsf-comp</groupId> 
-			<artifactId>chartcreator</artifactId> <version>1.2.0</version> <exclusions> 
-			<exclusion> <groupId>javax.faces</groupId> <artifactId>jsf-impl</artifactId> 
-			</exclusion> <exclusion> <groupId>javax.faces</groupId> <artifactId>jsf-api</artifactId> 
-			</exclusion> </exclusions> </dependency -->
-		<!-- JFree Charts Ends -->
 
 	</dependencies>
-
-	<!-- dependencyManagement> <dependencies> <dependency> <groupId>org.richfaces</groupId> 
-		<artifactId>richfaces-bom</artifactId> <version>${org.richfaces.bom.version}</version> 
-		<scope>import</scope> <type>pom</type> </dependency> </dependencies> </dependencyManagement -->
 
 	<repositories>
 		<repository>

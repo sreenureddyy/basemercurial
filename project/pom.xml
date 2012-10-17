@@ -16,8 +16,6 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project-version>1.0</project-version>
-
-		<!-- org.richfaces.bom.version> 4.0.0.Final </org.richfaces.bom.version -->
 		<org.springsecurity-version>
 			3.0.5.RELEASE
 		</org.springsecurity-version>
@@ -52,6 +50,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
 				<configuration>
 					<packagingExcludes>
 						WEB-INF/lib/slf4j*.jar
@@ -73,21 +72,20 @@
 					<execution>
 						<phase>pre-integration-test</phase>
 						<configuration>
-							<tasks>
+							<target>
 								<echo>
-									ANT TASK - copying jar files to the ${basedir}/target/classes
-								</echo>
+									ANT TASK - copying jar files to the	${basedir}/target/classes</echo>
 								<copy todir="${basedir}/target/classes" overwrite="true">
 									<fileset dir="${basedir}/target/project/">
 										<include name="WEB-INF/lib/base-*.jar" />
 									</fileset>
 								</copy>
-								<echo> ANT TASK - Deploying war to Tomcat... </echo>
 
+								<echo> ANT TASK - Deploying war to Tomcat... </echo>
 								<copy file="${basedir}/target/project.war" todir="${env.TOMCAT_HOME}/webapps" />
 								<delete dir="${env.TOMCAT_HOME}/webapps/project" />
+							</target>
 
-							</tasks>
 						</configuration>
 						<goals>
 							<goal>run</goal>

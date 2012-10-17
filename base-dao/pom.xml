@@ -15,9 +15,6 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project-version>1.0</project-version>
-
-		<!-- for Alhpa versions it was just 'ALPHA2' -->
-		<!-- org.richfaces.bom.version> 4.0.0.Final </org.richfaces.bom.version -->
 		<org.springsecurity-version>
 			3.0.5.RELEASE
 		</org.springsecurity-version>
