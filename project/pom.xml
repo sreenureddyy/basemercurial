@@ -50,6 +50,23 @@
 			</plugin>
 
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<packagingExcludes>
+						WEB-INF/lib/slf4j*.jar
+					</packagingExcludes>
+					<webXml>
+						${basedir}/src/main/webapp/WEB-INF/web.xml
+					</webXml>
+					<warName>project</warName>
+					<warSourceDirectory>
+						src/main/webapp
+					</warSourceDirectory>
+				</configuration>
+			</plugin>
+
+			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.6</version>
 				<executions>
@@ -58,8 +75,7 @@
 						<configuration>
 							<tasks>
 								<echo>
-									ANT TASK - copying files to the
-									junit testing folder....
+									ANT TASK - copying jar files to the ${basedir}/target/classes
 								</echo>
 								<copy todir="${basedir}/target/classes" overwrite="true">
 									<fileset dir="${basedir}/target/project/">
@@ -150,13 +166,6 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.2</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.6.0</version>
-		</dependency>
-
 
 		<dependency>
 			<groupId>mysql</groupId>
