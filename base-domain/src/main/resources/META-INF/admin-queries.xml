@@ -4,8 +4,4 @@
 
 <hibernate-mapping>
 
-	<query name="getAllUsers">
-                <![CDATA[ select user from com.sree.base.domain.User user ]]>
-	</query>
-
 </hibernate-mapping>

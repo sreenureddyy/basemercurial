@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<query name="findUserByUserName">
+              	<![CDATA[ select user from User user where user.email = ? and user.enabled = 1 ]]>
+	</query>
+
+	<!-- query name="getUserAuthorities">
+                <![CDATA[ select authority from UserAuthority userAuthority left join userAuthority.authority as authority left join userAuthority.user as user where user.email = ? ]]>
+	</query-->
+
+</hibernate-mapping>

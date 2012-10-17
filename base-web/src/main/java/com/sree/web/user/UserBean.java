@@ -61,13 +61,13 @@ public class UserBean extends BaseBean {
 	
 	public List<User> getUsers() {
 		if (users.size() <= 0) {
-			users = (List<User>) userService.getUser("findAllUsers", new Object[]{});
+			users = (List<User>) userService.getUser("getAllUsers", new Object[]{});
 		}
 		return users;
 	}
 	
 	private void populateUsers() {
-		users = (List<User>) userService.getUser("findAllUsers", new Object[] {});
+		users = (List<User>) userService.getUser("getAllUsers", new Object[] {});
 	}
 	
 	private List<SelectItem> populateGender(){

@@ -38,20 +38,20 @@ public class Branch extends BaseDomain {
 	@Column(name = "CONTACT_PERSON", nullable = false, unique = true)
 	private String contactPerson;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "BRANCH_ADDRESS", joinColumns = { @JoinColumn(name = "BRANCH") }, inverseJoinColumns = { @JoinColumn(name = "ADDRESS") })
-	List<Address> address = new ArrayList<Address>();
+	@Column(name = "EMAIL")
+	private String email;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "BRANCH_CONTACTS", joinColumns = { @JoinColumn(name = "BRANCH") }, inverseJoinColumns = { @JoinColumn(name = "CONTACT_DETAILS") })
-	List<ContactDetails> contactDetails = new ArrayList<ContactDetails>();
+	@Column(name = "MOBILE")
+	private String mobile;
+
+	@Column(name = "PHONE")
+	private String phone;
+
+	@Column(name = "FAX")
+	private String fax;
 
 	@Column(name = "ESTABLISHMENT_DATE", nullable = false)
 	private Date establishmentDate = new Date();
-	
-	@JoinColumn(name = "BRANCH_TYPE")
-	@ManyToOne(cascade = CascadeType.ALL)
-	private LookupValue branchType = new LookupValue();
 
 	@Column(name = "RENEWED_ON")
 	private Date renewedOn = new Date();
@@ -61,6 +61,14 @@ public class Branch extends BaseDomain {
 
 	@Column(name = "ENABLED")
 	private Boolean enabled = true;
+
+	@JoinColumn(name = "BRANCH_TYPE")
+	@ManyToOne(cascade = CascadeType.ALL)
+	private LookupValue branchType = new LookupValue();
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "BRANCH_ADDRESS", joinColumns = { @JoinColumn(name = "BRANCH") }, inverseJoinColumns = { @JoinColumn(name = "ADDRESS") })
+	List<Address> address = new ArrayList<Address>();
 
 	public Long getId() {
 		return id;
@@ -86,20 +94,36 @@ public class Branch extends BaseDomain {
 		this.contactPerson = contactPerson;
 	}
 
-	public List<Address> getAddress() {
-		return address;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setAddress(List<Address> address) {
-		this.address = address;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public List<ContactDetails> getContactDetails() {
-		return contactDetails;
+	public String getMobile() {
+		return mobile;
 	}
 
-	public void setContactDetails(List<ContactDetails> contactDetails) {
-		this.contactDetails = contactDetails;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getFax() {
+		return fax;
+	}
+
+	public void setFax(String fax) {
+		this.fax = fax;
 	}
 
 	public Date getEstablishmentDate() {
@@ -140,6 +164,14 @@ public class Branch extends BaseDomain {
 
 	public void setBranchType(LookupValue branchType) {
 		this.branchType = branchType;
+	}
+
+	public List<Address> getAddress() {
+		return address;
+	}
+
+	public void setAddress(List<Address> address) {
+		this.address = address;
 	}
 
 }

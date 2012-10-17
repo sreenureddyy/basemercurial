@@ -18,8 +18,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -32,9 +30,6 @@ import org.springframework.security.core.userdetails.UserDetails;
  * 
  */
 
-@NamedQueries({
-		@NamedQuery(name = "findUserByUserName", query = "select user from User user where user.username = ? and user.enabled = 1"),
-		@NamedQuery(name = "findAllUsers", query = "from User user") })
 @Entity
 @Table(name = "USER")
 @SuppressWarnings("serial")
@@ -44,8 +39,8 @@ public class User extends BaseDomain implements UserDetails {
 	@Column(name = "USER_ID")
 	private Long id;
 
-	@Column(name = "USER_NAME", nullable = false, unique = true)
-	private String username;
+	@Column(name = "EMAIL", nullable = false, unique = true)
+	private String email;
 
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;
@@ -53,7 +48,7 @@ public class User extends BaseDomain implements UserDetails {
 	@Column(name = "FIRSTNAME", nullable = false)
 	private String firstname;
 
-	@Column(name = "LASTNAME", nullable = false)
+	@Column(name = "LASTNAME", nullable = true)
 	private String lastname;
 
 	@Column(name = "GENDER", nullable = false)
@@ -61,6 +56,9 @@ public class User extends BaseDomain implements UserDetails {
 
 	@Column(name = "DOB", nullable = false)
 	private Date dob = new Date();
+
+	@Column(name = "MOBILE")
+	private String mobile;
 
 	@Column(name = "ACCOUNT_NON_LOCKED")
 	private Boolean accountNonLocked = true;
@@ -74,21 +72,17 @@ public class User extends BaseDomain implements UserDetails {
 	@Column(name = "ENABLED")
 	private Boolean enabled = true;
 
-	/*@JoinColumn(name = "USER_TYPE")
+	@JoinColumn(name = "USER_TYPE")
 	@ManyToOne(cascade = CascadeType.ALL)
-	private LookupValue userType = new LookupValue();*/
+	private LookupValue userType = new LookupValue();
 
-	@JoinColumn(name = "USER_ID")
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<UserAuthority> userAuthorities = new ArrayList<UserAuthority>();
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY )
+	@JoinTable(joinColumns = { @JoinColumn(name = "USER") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY") })
+	private List<Authority> userAuthorities = new ArrayList<Authority>();
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "USER_ADDRESS", joinColumns = { @JoinColumn(name = "USER") }, inverseJoinColumns = { @JoinColumn(name = "ADDRESS") })
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinTable(joinColumns = { @JoinColumn(name = "USER") }, inverseJoinColumns = { @JoinColumn(name = "ADDRESS") })
 	List<Address> address = new ArrayList<Address>();
-
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "USER_CONTACTS", joinColumns = { @JoinColumn(name = "USER") }, inverseJoinColumns = { @JoinColumn(name = "CONTACT_DETAILS") })
-	List<ContactDetails> contactDetails = new ArrayList<ContactDetails>();
 
 	@Transient
 	private Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
@@ -101,92 +95,20 @@ public class User extends BaseDomain implements UserDetails {
 		this.id = id;
 	}
 
-	public Boolean getAccountNonLocked() {
-		return accountNonLocked;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setAccountNonLocked(Boolean accountNonLocked) {
-		this.accountNonLocked = accountNonLocked;
-	}
-
-	public Boolean getAccountNonExpired() {
-		return accountNonExpired;
-	}
-
-	public void setAccountNonExpired(Boolean accountNonExpired) {
-		this.accountNonExpired = accountNonExpired;
-	}
-
-	public Boolean getCredentialsNonExpired() {
-		return credentialsNonExpired;
-	}
-
-	public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
-		this.credentialsNonExpired = credentialsNonExpired;
-	}
-
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public boolean isAccountNonExpired() {
-		return accountNonExpired;
-	}
-
-	public boolean isAccountNonLocked() {
-		return accountNonLocked;
-	}
-
-	public boolean isCredentialsNonExpired() {
-		return credentialsNonExpired;
-	}
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public Collection<GrantedAuthority> getAuthorities() {
-		return authorities;
-	}
-
-	public void setAuthorities(Collection<GrantedAuthority> authorities) {
-		this.authorities = authorities;
-	}
-
-	/*
-	 * public List<UserAuthority> getUserAuthorities() { return userAuthorities;
-	 * }
-	 * 
-	 * public void setUserAuthorities(List<UserAuthority> userAuthorities) {
-	 * this.userAuthorities = userAuthorities; }
-	 */
-
-	public List<Address> getAddress() {
-		return address;
-	}
-
-	public void setAddress(List<Address> address) {
-		this.address = address;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getFirstname() {
@@ -221,28 +143,102 @@ public class User extends BaseDomain implements UserDetails {
 		this.dob = dob;
 	}
 
-	/*public LookupValue getUserType() {
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public Boolean getAccountNonLocked() {
+		return accountNonLocked;
+	}
+
+	public void setAccountNonLocked(Boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+
+	public Boolean getAccountNonExpired() {
+		return accountNonExpired;
+	}
+
+	public void setAccountNonExpired(Boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+
+	public Boolean getCredentialsNonExpired() {
+		return credentialsNonExpired;
+	}
+
+	public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public List<Address> getAddress() {
+		return address;
+	}
+
+	public void setAddress(List<Address> address) {
+		this.address = address;
+	}
+
+	@Override
+	public Collection<GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
+
+	@Override
+	public String getUsername() {
+		return getEmail();
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return getAccountNonExpired();
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return getAccountNonLocked();
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return getCredentialsNonExpired();
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return getEnabled();
+	}
+
+	public LookupValue getUserType() {
 		return userType;
 	}
 
 	public void setUserType(LookupValue userType) {
 		this.userType = userType;
-	}*/
-
-	public List<ContactDetails> getContactDetails() {
-		return contactDetails;
 	}
 
-	public void setContactDetails(List<ContactDetails> contactDetails) {
-		this.contactDetails = contactDetails;
-	}
-
-	public List<UserAuthority> getUserAuthorities() {
+	public List<Authority> getUserAuthorities() {
 		return userAuthorities;
 	}
 
-	public void setUserAuthorities(List<UserAuthority> userAuthorities) {
+	public void setUserAuthorities(List<Authority> userAuthorities) {
 		this.userAuthorities = userAuthorities;
+	}
+
+	public void setAuthorities(Collection<GrantedAuthority> authorities) {
+		this.authorities = authorities;
 	}
 
 }

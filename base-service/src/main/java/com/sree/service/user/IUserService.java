@@ -16,4 +16,6 @@ public interface IUserService {
 	public List<?> getUser(String queryName, Object... objects);
 	public void saveUser(User user);
 	public void deleteUser(User user);
+	
+	public List<User> find(String query);
 }

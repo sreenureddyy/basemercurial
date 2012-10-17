@@ -6,6 +6,8 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<!-- Named JPQL queries per entity, but any other organization is possible -->
 		<mapping-file>META-INF/base-queries.xml</mapping-file>
+		<mapping-file>META-INF/user-queries.xml</mapping-file>
+		<mapping-file>META-INF/admin-queries.xml</mapping-file>
 		<jar-file>/WEB-INF/lib/*.jar</jar-file>
 		<properties>
 			<!-- 2nd level cache -->

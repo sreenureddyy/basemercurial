@@ -44,9 +44,9 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
-	<jd:initialize-database data-source="dataSource"
+	<!-- jd:initialize-database data-source="dataSource"
 		enabled="true">
 		<jd:script location="/META-INF/sql/init-db.sql" />
-	</jd:initialize-database>
+	</jd:initialize-database-->
 
 </beans>

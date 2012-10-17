@@ -42,4 +42,9 @@ public class UserService extends BaseService implements IUserService {
 		baseService.delete(user);		
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<User> find(String query) {
+		return baseService.find(query);
+	}
+
 }
