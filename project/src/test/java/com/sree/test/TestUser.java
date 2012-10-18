@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sree.base.domain.Address;
 import com.sree.base.domain.Authority;
-import com.sree.base.domain.Country;
 import com.sree.base.domain.LookupValue;
 import com.sree.base.domain.State;
 import com.sree.base.domain.User;
@@ -21,7 +20,7 @@ import com.sree.common.utils.CommonUtil;
 import com.sree.service.user.IUserService;
 
 /**
- * @author srinivasr
+ * @author sree
  * 
  */
 public class TestUser extends BaseTest {
@@ -30,10 +29,8 @@ public class TestUser extends BaseTest {
 	@Autowired
 	IUserService userService;
 	
-	//@Test
+	@Test
 	public void testCreateUser(){
-		
-		//Country country = (Country)baseService.find(Country.class, 1l);
 		
 		State state = (State)baseService.find(State.class, 1l);
 		
@@ -85,19 +82,13 @@ public class TestUser extends BaseTest {
 		
 	}
 	
-	//@Test
+	@Test
 	public void testGetAllUsers() {
 		List<User> users = userService.find("getAllUsers");
 		log.info(users.size());
 		for (User user : users) {
 			log.info(" Username is :: " + user.getUsername());
 		}
-	}
-	
-	@Test
-	public void testUserByName(){
-		List<User> userList = (List<User>) userService.getUser("findUserByUserName", "sreenureddy.y@gmail.com");
-		userList.get(0).getAddress().size();
 	}
 	
 }

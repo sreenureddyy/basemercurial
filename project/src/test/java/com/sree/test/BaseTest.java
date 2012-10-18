@@ -39,7 +39,7 @@ public class BaseTest {
 		log.info("Initilization of test suit");
 	}
 
-	//@Test
+	@Test
 	public void testCreateLookupCategory() {
 		LookupCategory lookupCategory = new LookupCategory();
 		lookupCategory.setIsActive(true);
@@ -58,7 +58,7 @@ public class BaseTest {
 		baseService.save(lookupCategory);
 	}
 
-	//@Test
+	@Test
 	public void testCreateLookupValue() {
 		LookupCategory lookupCategory = (LookupCategory)baseService.find(LookupCategory.class, 1l);
 
@@ -90,7 +90,7 @@ public class BaseTest {
 		baseService.save(lookupValue);
 	}
 
-	//@Test
+	@Test
 	public void testCreateCountry() {
 		Country country = new Country();
 		country.setCountryName("India");
@@ -102,7 +102,7 @@ public class BaseTest {
 		baseService.save(country);
 	}
 
-	//@Test
+	@Test
 	public void testCreateState() {
 		Country country = (Country)baseService.find(Country.class, 1l);
 		country.setId(1l);
@@ -117,7 +117,7 @@ public class BaseTest {
 		baseService.save(state);
 	}
 	
-	//@Test
+	@Test
 	public void testCreateUserAuthority() {
 		Authority authority = new Authority();
 		authority.setAuthority("ROLE_ALLACCESS");
