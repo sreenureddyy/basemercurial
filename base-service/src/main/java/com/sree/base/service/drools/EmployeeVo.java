@@ -6,7 +6,7 @@ package com.sree.base.service.drools;
 import java.io.Serializable;
 
 /**
- * @author srinivasr
+ * @author sree
  * 
  */
 @SuppressWarnings("serial")

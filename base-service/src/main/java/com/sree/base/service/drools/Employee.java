@@ -4,7 +4,7 @@
 package com.sree.base.service.drools;
 
 /**
- * @author srinivasr
+ * @author sree
  *
  */
 public class Employee {

@@ -25,7 +25,7 @@ import org.drools.io.ResourceFactory;
 import org.springframework.web.context.ServletContextAware;
 
 /**
- * @author srinivasr
+ * @author sree
  * 
  */
 //@Service("ruleEngine")

@@ -18,7 +18,7 @@ import org.drools.logger.KnowledgeRuntimeLoggerFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 
 /**
- * @author srinivasr
+ * @author sree
  *
  */
 public class EmployeeSalaries {
