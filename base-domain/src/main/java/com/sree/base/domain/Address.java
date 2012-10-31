@@ -55,6 +55,10 @@ public class Address extends BaseDomain {
 	@JoinColumn(name = "ADDRESS_TYPE")
 	@ManyToOne(cascade = CascadeType.ALL)
 	private LookupValue addressType = new LookupValue();
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "USER_ID", nullable = false)
+	private User user;
 
 	public Long getId() {
 		return id;
@@ -134,6 +138,14 @@ public class Address extends BaseDomain {
 
 	public void setAddressType(LookupValue addressType) {
 		this.addressType = addressType;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

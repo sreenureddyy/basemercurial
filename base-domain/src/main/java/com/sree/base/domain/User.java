@@ -6,28 +6,29 @@ package com.sree.base.domain;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
- * @author srinivasr
+ * @author sree
  * 
  */
 
@@ -77,16 +78,23 @@ public class User extends BaseDomain implements UserDetails {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private LookupValue userType = new LookupValue();
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@LazyCollection(LazyCollectionOption.FALSE)  
-	@JoinTable(joinColumns = { @JoinColumn(name = "USER") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY") })
-	private List<Authority> userAuthorities = new ArrayList<Authority>();
+	/*@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(joinColumns = { @JoinColumn(name = "USER") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY") })*/
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "USER_AUTHORITY", joinColumns = { 
+			@JoinColumn(name = "USER", nullable = false, updatable = false) }, 
+			inverseJoinColumns = { @JoinColumn(name = "AUTHORITY", 
+					nullable = false, updatable = false) })
+	private Set<Authority> userAuthorities = new HashSet<Authority>();
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@LazyCollection(LazyCollectionOption.FALSE)  
+	/*@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(joinColumns = { @JoinColumn(name = "USER") }, inverseJoinColumns = { @JoinColumn(name = "ADDRESS") })
 	List<Address> address = new ArrayList<Address>();
-
+*/
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade={CascadeType.ALL})
+	private Set<Address> address = new HashSet<Address>(0);
+	
 	@Transient
 	private Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
@@ -186,14 +194,6 @@ public class User extends BaseDomain implements UserDetails {
 		this.enabled = enabled;
 	}
 
-	public List<Address> getAddress() {
-		return address;
-	}
-
-	public void setAddress(List<Address> address) {
-		this.address = address;
-	}
-
 	@Override
 	public Collection<GrantedAuthority> getAuthorities() {
 		return authorities;
@@ -232,16 +232,32 @@ public class User extends BaseDomain implements UserDetails {
 		this.userType = userType;
 	}
 
-	public List<Authority> getUserAuthorities() {
+	/*public List<Authority> getUserAuthorities() {
 		return userAuthorities;
 	}
 
 	public void setUserAuthorities(List<Authority> userAuthorities) {
 		this.userAuthorities = userAuthorities;
-	}
+	}*/
 
 	public void setAuthorities(Collection<GrantedAuthority> authorities) {
 		this.authorities = authorities;
+	}
+
+	public Set<Address> getAddress() {
+		return address;
+	}
+
+	public void setAddress(Set<Address> address) {
+		this.address = address;
+	}
+
+	public Set<Authority> getUserAuthorities() {
+		return userAuthorities;
+	}
+
+	public void setUserAuthorities(Set<Authority> userAuthorities) {
+		this.userAuthorities = userAuthorities;
 	}
 
 }

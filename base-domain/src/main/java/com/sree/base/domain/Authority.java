@@ -3,17 +3,21 @@
  */
 package com.sree.base.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 
 /**
- * @author YSReddi
+ * @author sree
  * 
  */
 @Entity
@@ -27,6 +31,9 @@ public class Authority extends BaseDomain implements GrantedAuthority {
 
 	@Column(name = "AUTHORITY")
 	private String authority;
+
+	@ManyToMany(mappedBy = "userAuthorities")
+	private Set<User> users = new HashSet<User>(0);
 
 	public String getAuthority() {
 		return authority;
@@ -42,6 +49,14 @@ public class Authority extends BaseDomain implements GrantedAuthority {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 }

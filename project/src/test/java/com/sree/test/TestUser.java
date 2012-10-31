@@ -3,9 +3,10 @@
  */
 package com.sree.test;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
@@ -36,25 +37,12 @@ public class TestUser extends BaseTest {
 		
 		LookupValue lookupValue = (LookupValue)baseService.find(LookupValue.class, 2l);
 		
-		Address address = new Address();
-		address.setAddressType(lookupValue);
-		address.setHouseNo("25/37");
-		address.setStreet("Sanjeeva Nagar");
-		address.setLandmark("Ramalayam");
-		address.setCityTown("Nandyal");
-		address.setPinCode("518501");
-		address.setIsPrimary(true);
-		address.setCountry(state.getCountry());
-		address.setState(state);
-		address.setCreatedBy("Sree");
-		address.setCreatedDatetime(new Date());
-		
 		Authority authority = (Authority)baseService.find(Authority.class, 1l);
 		
 		lookupValue = (LookupValue)baseService.find(LookupValue.class, 1l);
 		
 		User user = new User();
-		user.setEmail("sreenureddy.y@gmail.com");
+		user.setEmail("reddddee@gmail.com");
 		user.setPassword(CommonUtil.encript("sree"));
 		user.setDob(new Date());
 		user.setFirstname("Sreenivasa");
@@ -67,18 +55,34 @@ public class TestUser extends BaseTest {
 		user.setCredentialsNonExpired(true);
 		user.setUserType(lookupValue);
 		
-		List<Address> listAddress = new ArrayList<Address>(1);
-		listAddress.add(address);
+		/*Set<Address> listAddress = new HashSet<Address>(1);
+		listAddress.add(address);*/
 		
-		List<Authority> listAuthority = new ArrayList<Authority>(1);
+		Set<Authority> listAuthority = new HashSet<Authority>(1);
 		listAuthority.add(authority);
 		
-		user.setAddress(listAddress);
+		//user.setAddress(listAddress); 
 		user.setUserAuthorities(listAuthority);
 		user.setCreatedBy("Sree");
 		user.setCreatedDatetime(new Date());
 		
 		userService.saveUser(user);
+		
+		Address address = new Address();
+		address.setAddressType(lookupValue);
+		address.setHouseNo("25/37");
+		address.setStreet("Sanjeeva Nagar");
+		address.setLandmark("Ramalayam");
+		address.setCityTown("Nandyal");
+		address.setPinCode("518501");
+		address.setIsPrimary(true);
+		address.setCountry(state.getCountry());
+		address.setState(state);
+		address.setCreatedBy("Sree");
+		address.setCreatedDatetime(new Date());
+		address.setUser(user);
+		
+		baseService.save(address);
 		
 	}
 	
@@ -89,6 +93,12 @@ public class TestUser extends BaseTest {
 		for (User user : users) {
 			log.info(" Username is :: " + user.getUsername());
 		}
+	}
+	
+	@Test
+	public void testUserByName(){
+		List<User> userList = (List<User>) userService.getUser("findUserByUserName", "sreenureddy.y@gmail.com");
+		userList.get(0).getAddress().size();
 	}
 	
 }
